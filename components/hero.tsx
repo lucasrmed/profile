@@ -134,7 +134,7 @@ export default function Hero() {
           </div>
 
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Com mais de 8 anos de experiência, especializado em criar interfaces
+            Com mais de 4 anos de experiência, especializado em criar interfaces
             modernas, acessíveis e de alta performance utilizando React,
             TypeScript e as mais recentes tecnologias front-end.
           </p>

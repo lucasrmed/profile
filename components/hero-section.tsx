@@ -3,13 +3,17 @@ import Image from "next/image"
 
 export default function HeroSection() {
   return (
-    <section id="sobre" className="py-20 md:py-32 flex flex-col md:flex-row items-center gap-10">
+    <section
+      id="sobre"
+      className="py-20 md:py-32 flex flex-col md:flex-row items-center gap-10"
+    >
       <div className="md:w-1/2 space-y-6">
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-          Olá, eu sou <span className="text-primary">Seu Nome</span>
+          Olá, eu sou <span className="text-primary">Lucas Medeiros</span>
         </h1>
         <p className="text-xl text-muted-foreground">
-          Desenvolvedor Web & Designer apaixonado por criar experiências digitais incríveis.
+          Desenvolvedor Web & Designer apaixonado por criar experiências
+          digitais incríveis.
         </p>
         <div className="flex gap-4">
           <Button>Entre em contato</Button>
@@ -28,6 +32,6 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
