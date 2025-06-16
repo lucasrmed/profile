@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Lucas Medeiros - Desenvolvedor Full Stack",
   description:
     "Portfólio de Lucas Medeiros, desenvolvedor full stack especialista em criar soluções web modernas e eficientes.",
-  generator: "v0.dev",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
