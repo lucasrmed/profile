@@ -11,7 +11,7 @@ import GitHubActivity from "@/components/github-activity"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-main">
       <Header />
       <main>
         <Hero />
@@ -27,4 +27,3 @@ export default function Home() {
     </div>
   )
 }
-

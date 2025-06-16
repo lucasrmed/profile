@@ -11,45 +11,43 @@ export default function Experience() {
   const workExperience = [
     {
       id: 1,
-      role: "Lead Front-end Developer",
-      company: "Tech Innovations Inc.",
-      period: "2021 - Presente",
+      role: "Desenvolvedor Front-End Sênior",
+      company: "Quattrus (Autônomo)",
+      period: "Mar 2024 - Presente",
       description:
-        "Lidero uma equipe de 6 desenvolvedores front-end, definindo arquitetura, padrões de código e melhores práticas. Implementei um design system que reduziu o tempo de desenvolvimento em 40% e melhorou a consistência da UI em todos os produtos.",
+        "Lidero o desenvolvimento de um projeto de edição colaborativa de elementos gráficos, utilizando Fabric.js para uma experiência visual rica. A arquitetura segue os princípios da Clean Architecture para garantir escalabilidade e manutenibilidade.",
       achievements: [
-        "Reduzi o tempo de carregamento das páginas em 65% através de otimizações de performance",
-        "Implementei CI/CD que diminuiu bugs em produção em 80%",
-        "Migrei o projeto legado para React e TypeScript, melhorando a manutenibilidade",
+        "Criação de um Design System para consistência e reutilização em múltiplos projetos.",
+        "Desenvolvimento de uma solução white label com suporte à internacionalização (i18n).",
+        "Implementação de CI/CD com Docker e Azure Pipelines para automação de entregas.",
+        "Foco em desafios complexos de UX, performance e arquitetura de software.",
       ],
-      technologies: ["React", "TypeScript", "Next.js", "Redux", "Jest", "Tailwind CSS"],
+      technologies: [
+        "React",
+        "Next.js",
+        "Fabric.js",
+        "TypeScript",
+        "Tanstack Query",
+        "Zustand",
+        "Tailwind CSS",
+        "Docker",
+        "Azure Pipelines",
+      ],
     },
     {
       id: 2,
-      role: "Front-end Developer Sênior",
-      company: "Digital Solutions",
-      period: "2018 - 2021",
+      role: "Desenvolvedor de Software",
+      company: "Villela Brasil Bank",
+      period: "Jan 2022 - Fev 2024",
       description:
-        "Responsável pelo desenvolvimento de aplicações web de alta performance para clientes enterprise. Trabalhei diretamente com designers e stakeholders para implementar interfaces complexas e garantir a melhor experiência do usuário.",
+        "Atuação consolidada no desenvolvimento de soluções Front-End com Next.js e mobile com React Native, focando na criação de aplicações eficientes, responsivas e com alta qualidade de experiência do usuário.",
       achievements: [
-        "Desenvolvi um framework interno que acelerou o desenvolvimento em 35%",
-        "Implementei testes automatizados que aumentaram a cobertura de código para 90%",
-        "Mentoria de desenvolvedores júnior e pleno",
+        "Desenvolvimento de aplicações web de alta eficiência e responsividade com Next.js.",
+        "Construção de aplicativos móveis multiplataforma (iOS/Android) com React Native.",
+        "Aplicação de técnicas avançadas de otimização de performance em todas as fases do projeto.",
+        "Trabalho com metodologias ágeis para garantir entregas flexíveis e de alta qualidade.",
       ],
-      technologies: ["React", "JavaScript", "Styled Components", "GraphQL", "Webpack"],
-    },
-    {
-      id: 3,
-      role: "Desenvolvedor Front-end",
-      company: "Creative Web Agency",
-      period: "2016 - 2018",
-      description:
-        "Desenvolvimento de websites e aplicações web responsivas para diversos clientes. Foco em performance, acessibilidade e experiência do usuário.",
-      achievements: [
-        "Implementei metodologia BEM e SASS que melhorou a organização do CSS",
-        "Desenvolvi componentes reutilizáveis que aceleraram entregas em 25%",
-        "Otimizei o processo de build reduzindo o tamanho dos bundles em 40%",
-      ],
-      technologies: ["JavaScript", "HTML5", "CSS3", "SASS", "jQuery", "Gulp"],
+      technologies: ["Next.js", "React Native", "React.js", "TypeScript", "Performance Optimization", "Agile"],
     },
   ]
 
@@ -104,46 +102,46 @@ export default function Experience() {
   ]
 
   return (
-    <section id="experiencia" className="py-20 bg-muted/30">
+    <section id="experiencia" className="py-20 bg-palette-darkGray/10">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Experiência Profissional</h2>
-          <p className="text-xl text-muted-foreground">Minha trajetória profissional e formação acadêmica</p>
+          <p className="text-xl text-palette-white/80">Minha trajetória profissional e formação acadêmica</p>
         </div>
 
         <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-md shadow-sm">
+          <div className="inline-flex rounded-md shadow-sm bg-palette-darkBlue/50">
             <button
               onClick={() => setActiveTab("work")}
-              className={`px-6 py-3 text-sm font-medium rounded-l-md border ${
+              className={`px-4 py-2 md:px-6 md:py-3 text-sm font-medium rounded-l-md border-y border-l border-palette-turquoise/20 flex items-center gap-2 transition-colors ${
                 activeTab === "work"
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-background text-muted-foreground border-input hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-transparent text-palette-white/80 hover:bg-palette-turquoise/10"
               }`}
             >
-              <Briefcase className="h-4 w-4 mr-2" />
+              <Briefcase className="h-4 w-4" />
               Experiência
             </button>
             <button
               onClick={() => setActiveTab("education")}
-              className={`px-6 py-3 text-sm font-medium border-y ${
+              className={`px-4 py-2 md:px-6 md:py-3 text-sm font-medium border border-palette-turquoise/20 flex items-center gap-2 transition-colors ${
                 activeTab === "education"
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-background text-muted-foreground border-input hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-transparent text-palette-white/80 hover:bg-palette-turquoise/10"
               }`}
             >
-              <GraduationCap className="h-4 w-4 mr-2" />
+              <GraduationCap className="h-4 w-4" />
               Formação
             </button>
             <button
               onClick={() => setActiveTab("certifications")}
-              className={`px-6 py-3 text-sm font-medium rounded-r-md border ${
+              className={`px-4 py-2 md:px-6 md:py-3 text-sm font-medium rounded-r-md border-y border-r border-palette-turquoise/20 flex items-center gap-2 transition-colors ${
                 activeTab === "certifications"
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-background text-muted-foreground border-input hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-transparent text-palette-white/80 hover:bg-palette-turquoise/10"
               }`}
             >
-              <Award className="h-4 w-4 mr-2" />
+              <Award className="h-4 w-4" />
               Certificações
             </button>
           </div>
@@ -152,27 +150,27 @@ export default function Experience() {
         {activeTab === "work" && (
           <div className="max-w-4xl mx-auto space-y-8">
             {workExperience.map((job) => (
-              <Card key={job.id} className="border-l-4 border-l-primary">
+              <Card key={job.id} className="border-l-4 border-l-primary bg-palette-darkBlue/50 shadow-lg">
                 <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-2 mb-4">
                     <div>
-                      <h3 className="text-xl font-bold">{job.role}</h3>
-                      <div className="text-lg text-muted-foreground">{job.company}</div>
+                      <h3 className="text-xl font-bold text-palette-white">{job.role}</h3>
+                      <div className="text-lg text-palette-turquoise">{job.company}</div>
                     </div>
-                    <div className="flex items-center text-muted-foreground">
+                    <div className="flex items-center text-palette-white/70 text-sm flex-shrink-0">
                       <Calendar className="h-4 w-4 mr-2" />
                       <span>{job.period}</span>
                     </div>
                   </div>
 
-                  <p className="mb-4">{job.description}</p>
+                  <p className="mb-4 text-palette-white/80">{job.description}</p>
 
                   {job.achievements && (
                     <div className="mb-4">
-                      <h4 className="font-medium mb-2">Principais conquistas:</h4>
+                      <h4 className="font-medium mb-2 text-palette-white">Principais conquistas:</h4>
                       <ul className="list-disc pl-5 space-y-1">
                         {job.achievements.map((achievement, index) => (
-                          <li key={index} className="text-muted-foreground">
+                          <li key={index} className="text-palette-white/80">
                             {achievement}
                           </li>
                         ))}
@@ -182,7 +180,11 @@ export default function Experience() {
 
                   <div className="flex flex-wrap gap-2 mt-4">
                     {job.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline">
+                      <Badge
+                        key={tech}
+                        variant="secondary"
+                        className="font-normal bg-palette-turquoise/10 text-palette-turquoise border-palette-turquoise/20"
+                      >
                         {tech}
                       </Badge>
                     ))}
@@ -196,20 +198,20 @@ export default function Experience() {
         {activeTab === "education" && (
           <div className="max-w-4xl mx-auto space-y-8">
             {education.map((edu) => (
-              <Card key={edu.id} className="border-l-4 border-l-primary">
+              <Card key={edu.id} className="border-l-4 border-l-primary bg-palette-darkBlue/50 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                     <div>
-                      <h3 className="text-xl font-bold">{edu.degree}</h3>
-                      <div className="text-lg text-muted-foreground">{edu.institution}</div>
+                      <h3 className="text-xl font-bold text-palette-white">{edu.degree}</h3>
+                      <div className="text-lg text-palette-turquoise">{edu.institution}</div>
                     </div>
-                    <div className="flex items-center text-muted-foreground">
+                    <div className="flex items-center text-palette-white/70">
                       <Calendar className="h-4 w-4 mr-2" />
                       <span>{edu.period}</span>
                     </div>
                   </div>
 
-                  <p>{edu.description}</p>
+                  <p className="text-palette-white/80">{edu.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -219,20 +221,20 @@ export default function Experience() {
         {activeTab === "certifications" && (
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
             {certifications.map((cert) => (
-              <Card key={cert.id}>
+              <Card key={cert.id} className="bg-palette-darkBlue/50 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="bg-primary/10 p-3 rounded-lg">
                       <Award className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-bold">{cert.name}</h3>
-                      <div className="text-muted-foreground">{cert.issuer}</div>
-                      <div className="flex items-center mt-2 text-sm">
+                      <h3 className="font-bold text-palette-white">{cert.name}</h3>
+                      <div className="text-palette-turquoise">{cert.issuer}</div>
+                      <div className="flex items-center mt-2 text-sm text-palette-white/70">
                         <Calendar className="h-3 w-3 mr-1" />
                         <span>{cert.date}</span>
                       </div>
-                      <div className="text-xs text-muted-foreground mt-1">ID: {cert.credentialId}</div>
+                      <div className="text-xs text-palette-white/60 mt-1">ID: {cert.credentialId}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -244,4 +246,3 @@ export default function Experience() {
     </section>
   )
 }
-
