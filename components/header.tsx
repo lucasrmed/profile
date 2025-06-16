@@ -42,12 +42,12 @@ export default function Header() {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo-lucas-medeiros.png" // This path will now use the new image
+            src="/logo-lucas-medeiros.png" // Este caminho usará a imagem atualizada
             alt="Lucas Medeiros Logo"
-            width={150}
-            height={40}
-            className="h-8 md:h-10 w-auto"
-            priority // Add priority if this is an LCP element
+            width={150} // Ajuste a largura conforme necessário para o seu logo
+            height={40} // Ajuste a altura conforme necessário para o seu logo
+            className="h-8 md:h-10 w-auto" // Altura responsiva
+            priority // Importante para LCP (Largest Contentful Paint)
           />
         </Link>
 
