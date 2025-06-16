@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image" // Import the Image component
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -41,17 +41,16 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          {/* Replace text logo with Image component */}
-         <Image
-            src="/logo-lucas-medeiros.png"
+          <Image
+            src="/logo-lucas-medeiros.png" // This path will now use the new image
             alt="Lucas Medeiros Logo"
-            width={150} // Adjust width as needed
-            height={40} // Adjust height as needed
-            className="h-8 md:h-10 w-auto" // Responsive height
+            width={150}
+            height={40}
+            className="h-8 md:h-10 w-auto"
+            priority // Add priority if this is an LCP element
           />
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {navItems.map((item) => (
             <Link
@@ -67,7 +66,6 @@ export default function Header() {
           </Button>
         </nav>
 
-        {/* Mobile Menu Button */}
         <Button
           variant="ghost"
           size="icon"
@@ -78,7 +76,6 @@ export default function Header() {
         </Button>
       </div>
 
-      {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-palette-darkBlue border-b border-palette-turquoise/10">
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
