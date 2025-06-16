@@ -1,86 +1,179 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Github, GitCommit, GitPullRequest, GitMerge, Star, ArrowRight } from "lucide-react"
+import { Github, Star, ArrowRight, Users, BookCopy, AlertTriangle } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
 
-export default function GitHubActivity() {
-  // Simulação de dados de atividade do GitHub
-  const [loading, setLoading] = useState(true)
+// Tipos exportados para serem usados em app/page.tsx
+export interface GitHubUser {
+  login: string
+  avatar_url: string
+  html_url: string
+  name: string
+  bio: string
+  public_repos: number
+  followers: number
+  following: number
+}
 
-  useEffect(() => {
-    // Simular carregamento de dados
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 1000)
+export interface GitHubRepo {
+  id: number
+  name: string
+  html_url: string
+  description: string | null
+  stargazers_count: number
+  forks_count: number
+  language: string | null
+  updated_at: string
+}
 
-    return () => clearTimeout(timer)
-  }, [])
+interface GitHubActivityProps {
+  user: GitHubUser | null
+  repos: GitHubRepo[]
+  initialError: string | null
+}
 
-  const contributionData = Array.from({ length: 52 * 7 }, () => Math.floor(Math.random() * 5))
+// Simulação de dados de contribuição
+const contributionData = Array.from({ length: 52 * 7 }, () => Math.floor(Math.random() * 5))
 
-  const stats = {
-    commits: 1247,
-    pullRequests: 183,
-    codeReviews: 215,
-    stars: 342,
-    repositories: 28,
-    contributions: 1589,
+export default function GitHubActivity({ user, repos, initialError }: GitHubActivityProps) {
+  if (initialError) {
+    return (
+      <section id="github-activity" className="py-20 bg-palette-navy/30">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4 text-destructive">
+            <AlertTriangle className="h-8 w-8" />
+            <h2 className="text-2xl font-bold">Erro ao Carregar Atividade do GitHub</h2>
+          </div>
+          <p className="text-palette-white/80 max-w-2xl mx-auto">{initialError}</p>
+        </div>
+      </section>
+    )
   }
 
-  const recentActivity = [
-    {
-      type: "commit",
-      repo: "next-dashboard",
-      message: "Fix performance issues in data fetching",
-      date: "2 dias atrás",
-    },
-    { type: "pr", repo: "react-components", message: "Add new form components with validation", date: "5 dias atrás" },
-    {
-      type: "review",
-      repo: "design-system",
-      message: "Review and approve button component updates",
-      date: "1 semana atrás",
-    },
-    { type: "commit", repo: "api-client", message: "Implement caching layer for API requests", date: "1 semana atrás" },
-  ]
+  if (!user) {
+    return (
+      <section id="github-activity" className="py-20 bg-palette-navy/30">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4 text-destructive">
+            <AlertTriangle className="h-8 w-8" />
+            <h2 className="text-2xl font-bold">Dados do Usuário Indisponíveis</h2>
+          </div>
+          <p className="text-palette-white/80">
+            Não foi possível carregar os dados do usuário do GitHub. Verifique a conexão ou tente mais tarde.
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   return (
-    <section className="py-20">
+    <section id="github-activity" className="py-20 bg-palette-navy/30">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto mb-16 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Github className="h-6 w-6" />
-            <h2 className="text-3xl md:text-4xl font-bold">Contribuições Open Source</h2>
+            <Github className="h-8 w-8 text-palette-turquoise" />
+            <h2 className="text-3xl md:text-4xl font-bold text-palette-white">Minha Atividade no GitHub</h2>
           </div>
-          <p className="text-xl text-muted-foreground">Minha atividade no GitHub e contribuições para a comunidade</p>
+          <p className="text-xl text-palette-white/80">
+            Acompanhe minhas contribuições, projetos e atividades na comunidade open source.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <div>
-            <h3 className="text-xl font-bold mb-6">Atividade no último ano</h3>
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <Card className="md:col-span-1 bg-palette-darkBlue border-palette-turquoise/20 shadow-xl p-6 flex flex-col items-center text-center">
+            {user.avatar_url && (
+              <Image
+                src={user.avatar_url || "/placeholder.svg"}
+                alt={user.name || user.login}
+                width={120}
+                height={120}
+                className="rounded-full border-4 border-palette-turquoise/30 mb-4"
+              />
+            )}
+            <h3 className="text-2xl font-bold text-palette-white">{user.name || user.login}</h3>
+            <p className="text-palette-turquoise">@{user.login}</p>
+            {user.bio && <p className="text-sm text-palette-white/70 mt-2 mb-4">{user.bio}</p>}
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm mt-4">
+              <div className="flex items-center text-palette-white/90">
+                <BookCopy className="h-4 w-4 mr-1 text-palette-turquoise" /> {user.public_repos} Repositórios
+              </div>
+              <div className="flex items-center text-palette-white/90">
+                <Users className="h-4 w-4 mr-1 text-palette-turquoise" /> {user.followers} Seguidores
+              </div>
+            </div>
+            <Button
+              asChild
+              variant="outline"
+              className="mt-6 border-palette-turquoise text-palette-turquoise hover:bg-palette-turquoise/10 w-full"
+            >
+              <Link href={user.html_url} target="_blank" rel="noopener noreferrer">
+                Ver Perfil no GitHub <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </Card>
 
-            {loading ? (
-              <div className="h-32 bg-muted animate-pulse rounded-lg"></div>
-            ) : (
-              <Card>
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-52 gap-1">
+          <div className="md:col-span-2 space-y-8">
+            <div>
+              <h3 className="text-2xl font-bold mb-6 text-palette-white">Repositórios Recentes</h3>
+              {repos && repos.length > 0 ? (
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {repos.map((repo) => (
+                    <Card
+                      key={repo.id}
+                      className="bg-palette-darkBlue border-palette-turquoise/20 shadow-lg hover:shadow-palette-turquoise/20 transition-shadow"
+                    >
+                      <CardContent className="p-4">
+                        <Link href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                          <h4 className="font-bold text-palette-turquoise truncate hover:underline">{repo.name}</h4>
+                        </Link>
+                        <p className="text-xs text-palette-white/70 h-10 my-1 overflow-hidden line-clamp-2">
+                          {repo.description || "Sem descrição."}
+                        </p>
+                        <div className="flex items-center justify-between text-xs text-palette-white/60 mt-2">
+                          <div className="flex items-center">
+                            <Star className="h-3 w-3 mr-1 text-yellow-400" /> {repo.stargazers_count}
+                          </div>
+                          {repo.language && (
+                            <div className="flex items-center">
+                              <div className={`h-2 w-2 rounded-full mr-1 bg-palette-turquoise`}></div>
+                              {repo.language}
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <Card className="bg-palette-darkBlue border-palette-turquoise/20 shadow-lg">
+                  <CardContent className="p-4 text-center text-palette-white/70">
+                    Nenhum repositório recente encontrado ou falha ao carregar.
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold mb-6 text-palette-white">Atividade de Contribuição</h3>
+              <Card className="bg-palette-darkBlue border-palette-turquoise/20 shadow-lg">
+                <CardContent className="p-4 md:p-6">
+                  <div className="grid grid-cols-52 gap-0.5 md:gap-1 overflow-x-auto pb-2">
                     {Array.from({ length: 52 }).map((_, weekIndex) => (
-                      <div key={weekIndex} className="grid grid-rows-7 gap-1">
+                      <div key={weekIndex} className="grid grid-rows-7 gap-0.5 md:gap-1">
                         {Array.from({ length: 7 }).map((_, dayIndex) => {
                           const intensity = contributionData[weekIndex * 7 + dayIndex]
-                          let bgColor = "bg-muted"
-
-                          if (intensity === 1) bgColor = "bg-primary/20"
-                          else if (intensity === 2) bgColor = "bg-primary/40"
-                          else if (intensity === 3) bgColor = "bg-primary/60"
-                          else if (intensity === 4) bgColor = "bg-primary/80"
-
+                          let bgColor = "bg-palette-navy/50"
+                          if (intensity === 1) bgColor = "bg-palette-turquoise/20"
+                          else if (intensity === 2) bgColor = "bg-palette-turquoise/40"
+                          else if (intensity === 3) bgColor = "bg-palette-turquoise/70"
+                          else if (intensity >= 4) bgColor = "bg-palette-turquoise"
                           return (
                             <div
                               key={dayIndex}
-                              className={`w-2 h-2 rounded-sm ${bgColor}`}
+                              className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-sm ${bgColor}`}
                               title={`${intensity} contribuições`}
                             />
                           )
@@ -88,132 +181,23 @@ export default function GitHubActivity() {
                       </div>
                     ))}
                   </div>
-
-                  <div className="flex items-center justify-between mt-4 text-xs text-muted-foreground">
+                  <div className="flex items-center justify-between mt-2 text-xs text-palette-white/60">
                     <div>Menos</div>
                     <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-muted rounded-sm"></div>
-                      <div className="w-2 h-2 bg-primary/20 rounded-sm"></div>
-                      <div className="w-2 h-2 bg-primary/40 rounded-sm"></div>
-                      <div className="w-2 h-2 bg-primary/60 rounded-sm"></div>
-                      <div className="w-2 h-2 bg-primary/80 rounded-sm"></div>
+                      <div className="w-2 h-2 bg-palette-navy/50 rounded-sm"></div>
+                      <div className="w-2 h-2 bg-palette-turquoise/20 rounded-sm"></div>
+                      <div className="w-2 h-2 bg-palette-turquoise/40 rounded-sm"></div>
+                      <div className="w-2 h-2 bg-palette-turquoise/70 rounded-sm"></div>
+                      <div className="w-2 h-2 bg-palette-turquoise rounded-sm"></div>
                     </div>
                     <div>Mais</div>
                   </div>
                 </CardContent>
               </Card>
-            )}
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-              <Card>
-                <CardContent className="p-4 flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <GitCommit className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">{stats.commits}</div>
-                    <div className="text-xs text-muted-foreground">Commits</div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-4 flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <GitPullRequest className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">{stats.pullRequests}</div>
-                    <div className="text-xs text-muted-foreground">Pull Requests</div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-4 flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <GitMerge className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">{stats.codeReviews}</div>
-                    <div className="text-xs text-muted-foreground">Code Reviews</div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-4 flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <Star className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">{stats.stars}</div>
-                    <div className="text-xs text-muted-foreground">Stars</div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-4 flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <Github className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold">{stats.repositories}</div>
-                    <div className="text-xs text-muted-foreground">Repositórios</div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold mb-6">Atividade recente</h3>
-
-            {loading ? (
-              <div className="space-y-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-24 bg-muted animate-pulse rounded-lg"></div>
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {recentActivity.map((activity, index) => (
-                  <Card key={index}>
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-3">
-                        <div className="bg-primary/10 p-2 rounded-full mt-1">
-                          {activity.type === "commit" && <GitCommit className="h-4 w-4 text-primary" />}
-                          {activity.type === "pr" && <GitPullRequest className="h-4 w-4 text-primary" />}
-                          {activity.type === "review" && <GitMerge className="h-4 w-4 text-primary" />}
-                        </div>
-                        <div>
-                          <div className="font-medium">{activity.repo}</div>
-                          <div className="text-sm text-muted-foreground mb-1">{activity.message}</div>
-                          <div className="text-xs text-muted-foreground">{activity.date}</div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-
-                <div className="text-center mt-6">
-                  <a
-                    href="https://github.com/yourusername"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline inline-flex items-center"
-                  >
-                    Ver mais no GitHub
-                    <ArrowRight className="ml-1 h-3 w-3" />
-                  </a>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
     </section>
   )
 }
-

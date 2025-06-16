@@ -42,7 +42,7 @@ export default function Contact() {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Vamos Conversar</h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-palette-cream">
             Interessado em trabalhar juntos? Entre em contato para discutirmos seu projeto.
           </p>
         </div>
@@ -131,7 +131,7 @@ export default function Contact() {
                     <h4 className="font-medium">Email</h4>
                     <a
                       href="mailto:contato@seudominio.com"
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-palette-cream hover:text-primary transition-colors"
                     >
                       contato@seudominio.com
                     </a>
@@ -146,7 +146,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-medium">Telefone</h4>
-                    <a href="tel:+5511999999999" className="text-muted-foreground hover:text-primary transition-colors">
+                    <a href="tel:+5511999999999" className="text-palette-cream hover:text-primary transition-colors">
                       +55 (11) 99999-9999
                     </a>
                   </div>
@@ -160,7 +160,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-medium">Localização</h4>
-                    <p className="text-muted-foreground">São Paulo, Brasil</p>
+                    <p className="text-palette-cream">São Paulo, Brasil</p>
                   </div>
                 </CardContent>
               </Card>
@@ -192,7 +192,7 @@ export default function Contact() {
 
             <div className="mt-8 p-6 bg-muted/30 rounded-lg">
               <h4 className="font-medium mb-2">Disponibilidade</h4>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-palette-cream mb-4">
                 Atualmente disponível para projetos freelance e oportunidades de contrato.
               </p>
               <div className="flex items-center gap-2">
@@ -206,4 +206,3 @@ export default function Contact() {
     </section>
   )
 }
-

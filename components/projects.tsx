@@ -91,7 +91,7 @@ export default function Projects() {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Projetos em Destaque</h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-palette-silver">
             Uma seleção dos meus melhores trabalhos em desenvolvimento front-end
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function Projects() {
                   )}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
+                <p className="text-palette-silver mb-4 line-clamp-2">{project.description}</p>
                 <div className="flex items-center gap-3">
                   <Link href={project.demoUrl}>
                     <Button variant="default" size="sm" className="gap-1">
@@ -156,4 +156,3 @@ export default function Projects() {
     </section>
   )
 }
-
