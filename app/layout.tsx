@@ -9,9 +9,9 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Lucas Medeiros - Desenvolvedor Full Stack",
   description:
-    "Portfólio de Lucas Medeiros, desenvolvedor full stack especialista em criar soluções web modernas e eficientes.",,
+    "Portfólio de Lucas Medeiros, desenvolvedor full stack especialista em criar soluções web modernas e eficientes.", // Vírgula extra removida daqui
   // Adicione outras meta tags relevantes aqui, como open graph, twitter cards, etc.
-    generator: 'v0.dev'
+  generator: "v0.dev", // Supondo que esta linha exista ou você queira adicioná-la
 }
 
 export default function RootLayout({
@@ -24,17 +24,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo-lucas-medeiros.png" type="image/png" />
         <link rel="apple-touch-icon" href="/logo-lucas-medeiros.png" type="image/png" />
-        {/* Você pode adicionar outros tamanhos ou tipos de ícone aqui se necessário */}
-        {/* Ex: <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"> */}
-        {/* Ex: <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"> */}
       </head>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark" // Mantendo o tema escuro como padrão conforme o design
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>

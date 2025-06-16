@@ -42,7 +42,7 @@ export default function Header() {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           {/* Replace text logo with Image component */}
-          <Image
+         <Image
             src="/logo-lucas-medeiros.png"
             alt="Lucas Medeiros Logo"
             width={150} // Adjust width as needed
