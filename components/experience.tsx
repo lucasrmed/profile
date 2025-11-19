@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Briefcase, Calendar, Award, GraduationCap } from "lucide-react"
+import { Briefcase, Calendar, Award, GraduationCap } from 'lucide-react'
 
 export default function Experience() {
   const [activeTab, setActiveTab] = useState("work")
@@ -12,8 +12,30 @@ export default function Experience() {
     {
       id: 1,
       role: "Desenvolvedor Front-End Sênior",
+      company: "DBC Company",
+      period: "Jul 2025 - Presente",
+      description:
+        "Desenvolvedor front-end sênior responsável pela evolução de produtos estratégicos ZZLink e ZZPortal. No ZZLink, atuo na melhoria da jornada de checkout com integrações de pagamento (PIX, cartão de crédito), impactando diretamente a conversão. No ZZPortal, desenvolvo funcionalidades para vendedores e gestores, incluindo dashboards, relatórios e CSAT.",
+      achievements: [
+        "Implementação de fluxos de pagamento otimizados (PIX, cartão, split payment).",
+        "Desenvolvimento de dashboards e relatórios para análise de vendas e indicadores.",
+        "Redução de fricção no checkout através de otimizações de performance e UI/UX.",
+        "Organização e detalhamento técnico de demandas para maior previsibilidade nas entregas.",
+      ],
+      technologies: [
+        "React.js",
+        "React Hooks",
+        "TypeScript",
+        "Next.js",
+        "Performance Optimization",
+        "UI/UX",
+      ],
+    },
+    {
+      id: 2,
+      role: "Desenvolvedor Front-End Sênior",
       company: "Quattrus (Autônomo)",
-      period: "Mar 2024 - Presente",
+      period: "Mar 2024 - Jun 2025",
       description:
         "Lidero o desenvolvimento de um projeto de edição colaborativa de elementos gráficos, utilizando Fabric.js para uma experiência visual rica. A arquitetura segue os princípios da Clean Architecture para garantir escalabilidade e manutenibilidade.",
       achievements: [
@@ -35,7 +57,7 @@ export default function Experience() {
       ],
     },
     {
-      id: 2,
+      id: 3,
       role: "Desenvolvedor de Software",
       company: "Villela Brasil Bank",
       period: "Jan 2022 - Fev 2024",

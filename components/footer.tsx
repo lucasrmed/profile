@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { Github, Linkedin, Twitter } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -9,9 +9,8 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
-            
             <p className="mt-2 text-sm text-muted-foreground max-w-md">
-              Desenvolvedor Front-end Sênior especializado em criar experiências digitais modernas, acessíveis e de alta
+              Desenvolvedor Full Stack especializado em criar experiências digitais modernas, acessíveis e de alta
               performance.
             </p>
           </div>
@@ -28,7 +27,7 @@ export default function Footer() {
                 <Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
               </a>
             </div>
-            <p className="text-sm text-muted-foreground">© {currentYear} Seu Nome. Todos os direitos reservados.</p>
+            <p className="text-sm text-muted-foreground">© {currentYear} Lucas Medeiros. Todos os direitos reservados.</p>
           </div>
         </div>
       </div>

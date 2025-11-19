@@ -71,6 +71,13 @@
     @apply border-border;
   }
   body {
-    @apply bg-gradient-main text-foreground min-h-screen;
+    @apply bg-background text-foreground min-h-screen;
+  }
+}
+
+/* Define custom gradient class */
+@layer utilities {
+  .bg-gradient-main {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(210 57% 17%) 100%);
   }
 }

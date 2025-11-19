@@ -2,32 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { Card } from "@/components/ui/card"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Settings } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Loader2 } from "lucide-react"
+import { Loader2 } from 'lucide-react'
 import PhotoLightbox from "@/components/photo-lightbox"
+import { Button } from "@/components/ui/button"
 
-// Simulate a larger dataset for each category
-const generateMorePhotos = (basePhotos: any[], totalCount = 30) => {
-  const result = [...basePhotos]
-
-  while (result.length < totalCount) {
-    const originalPhotos = basePhotos.map((photo, index) => ({
-      ...photo,
-      id: photo.id + result.length,
-      date: new Date(new Date(photo.date).setMonth(new Date(photo.date).getMonth() - result.length / basePhotos.length))
-        .toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" })
-        .replace(".", ""),
-    }))
-    result.push(...originalPhotos)
-  }
-
-  return result.slice(0, totalCount)
-}
-
-// Add this PhotoGrid component with lazy loading and infinite scroll
 function PhotoGrid({ photos: initialPhotos }: { photos: any[] }) {
   const [hoveredPhoto, setHoveredPhoto] = useState<number | null>(null)
   const [photos, setPhotos] = useState<any[]>([])
@@ -276,192 +258,72 @@ function PhotoGrid({ photos: initialPhotos }: { photos: any[] }) {
 }
 
 export default function PhotographyPage() {
-  const [activeTab, setActiveTab] = useState("natureza")
+  const [activeTab, setActiveTab] = useState("lifestyle")
+  const [photos, setPhotos] = useState<any>({ lifestyle: [], urbana: [] })
+  const [loading, setLoading] = useState(true)
 
-  // Base photo data
-  const basePhotos = {
-    natureza: [
-      {
-        id: 1,
-        title: "Montanhas ao Pôr do Sol",
-        description: "Capturada durante uma trilha nas montanhas, com o sol se pondo no horizonte.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "15 Jun 2023",
-        location: "Serra da Mantiqueira, Brasil",
-      },
-      {
-        id: 2,
-        title: "Cachoeira Véu de Noiva",
-        description: "A beleza natural da queda d'água em meio à floresta preservada.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "22 Jul 2023",
-        location: "Chapada dos Veadeiros, Brasil",
-      },
-      {
-        id: 3,
-        title: "Floresta Nebulosa",
-        description: "Árvores emergindo da névoa matinal em uma floresta de altitude.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "03 Ago 2023",
-        location: "Campos do Jordão, Brasil",
-      },
-      {
-        id: 4,
-        title: "Praia Deserta",
-        description: "Areias douradas e águas cristalinas em uma praia isolada.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "12 Set 2023",
-        location: "Fernando de Noronha, Brasil",
-      },
-      {
-        id: 5,
-        title: "Campos de Lavanda",
-        description: "Extensos campos de lavanda sob o céu azul de verão.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "05 Out 2023",
-        location: "Cunha, Brasil",
-      },
-      {
-        id: 6,
-        title: "Lago Espelhado",
-        description: "Reflexo perfeito das montanhas na superfície calma do lago.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "18 Nov 2023",
-        location: "Patagônia, Argentina",
-      },
-    ],
-    urbana: [
-      {
-        id: 7,
-        title: "Luzes da Cidade",
-        description: "Vista noturna da cidade com seus milhares de luzes brilhantes.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "10 Jan 2023",
-        location: "São Paulo, Brasil",
-      },
-      {
-        id: 8,
-        title: "Arquitetura Moderna",
-        description: "Linhas e formas de um edifício contemporâneo no centro da cidade.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "25 Fev 2023",
-        location: "Rio de Janeiro, Brasil",
-      },
-      {
-        id: 9,
-        title: "Estação Antiga",
-        description: "Detalhes arquitetônicos de uma estação ferroviária histórica.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "14 Mar 2023",
-        location: "Paranapiacaba, Brasil",
-      },
-      {
-        id: 10,
-        title: "Grafite Urbano",
-        description: "Arte de rua colorida em um bairro boêmio da cidade.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "30 Abr 2023",
-        location: "Belo Horizonte, Brasil",
-      },
-    ],
-    retratos: [
-      {
-        id: 11,
-        title: "Olhar Profundo",
-        description: "Retrato em preto e branco capturando a expressão intensa do sujeito.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "08 Mai 2023",
-        location: "Estúdio, São Paulo",
-      },
-      {
-        id: 12,
-        title: "Sorriso Genuíno",
-        description: "Momento espontâneo de alegria capturado em luz natural.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "19 Jun 2023",
-        location: "Parque Ibirapuera, São Paulo",
-      },
-      {
-        id: 13,
-        title: "Artesão em Ação",
-        description: "Retrato ambiental de um artesão trabalhando em sua oficina.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "27 Jul 2023",
-        location: "Embu das Artes, Brasil",
-      },
-    ],
-    eventos: [
-      {
-        id: 14,
-        title: "Show ao Vivo",
-        description: "Banda se apresentando para uma multidão entusiasmada.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "12 Ago 2023",
-        location: "Festival de Verão, Salvador",
-      },
-      {
-        id: 15,
-        title: "Casamento na Praia",
-        description: "Momento emocionante durante uma cerimônia de casamento à beira-mar.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "23 Set 2023",
-        location: "Ilhabela, Brasil",
-      },
-      {
-        id: 16,
-        title: "Conferência de Tecnologia",
-        description: "Palestrante compartilhando conhecimento em um evento de tecnologia.",
-        image: "/placeholder.svg?height=800&width=1200",
-        date: "05 Out 2023",
-        location: "Centro de Convenções, Brasília",
-      },
-    ],
-  }
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const response = await fetch("/api/photos")
+        const data = await response.json()
+        setPhotos(data)
+      } catch (error) {
+        console.error("Error fetching photos:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchPhotos()
+  }, [])
 
-  // Generate larger datasets for each category
-  const photos = {
-    natureza: generateMorePhotos(basePhotos.natureza, 30),
-    urbana: generateMorePhotos(basePhotos.urbana, 24),
-    retratos: generateMorePhotos(basePhotos.retratos, 18),
-    eventos: generateMorePhotos(basePhotos.eventos, 21),
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-main pt-24 flex items-center justify-center">
+        <Loader2 className="h-8 w-8 text-palette-turquoise animate-spin" />
+      </div>
+    )
   }
 
   return (
     <div className="min-h-screen bg-gradient-main pt-24">
       <div className="container mx-auto px-4 py-12">
-        <div className="flex items-center mb-8">
+        <div className="flex items-center justify-between mb-8">
           <Link href="/" className="text-palette-turquoise hover:text-palette-turquoise/80 flex items-center">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar para Home
+          </Link>
+          <Link href="/fotografia/admin">
+            <Button variant="outline" size="sm" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Admin
+            </Button>
           </Link>
         </div>
 
         <div className="max-w-4xl mx-auto mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-palette-white">Minha Fotografia</h1>
           <p className="text-xl text-palette-white/80">
-            Capturando momentos e paisagens através das minhas lentes. Aqui compartilho minha paixão pela fotografia e
-            algumas das minhas melhores imagens.
+            Capturando momentos do dia a dia, arquitetura e lifestyle. Aqui compartilho minha visão através das lentes.
           </p>
           <div className="mt-4 flex items-center text-palette-turquoise">
             <div className="flex items-center">
               <span className="text-sm">
-                {activeTab === "natureza" && "30 fotos"}
-                {activeTab === "urbana" && "24 fotos"}
-                {activeTab === "retratos" && "18 fotos"}
-                {activeTab === "eventos" && "21 fotos"}
+                {activeTab === "lifestyle" && `${photos.lifestyle.length} fotos`}
+                {activeTab === "urbana" && `${photos.urbana.length} fotos`}
               </span>
             </div>
           </div>
         </div>
 
-        <Tabs defaultValue="natureza" className="max-w-7xl mx-auto" onValueChange={(value) => setActiveTab(value)}>
+        <Tabs defaultValue="lifestyle" className="max-w-7xl mx-auto" onValueChange={(value) => setActiveTab(value)}>
           <div className="flex justify-center mb-12">
-            <TabsList className="grid grid-cols-2 md:grid-cols-4 w-full max-w-xl bg-palette-darkBlue">
+            <TabsList className="grid grid-cols-2 w-full max-w-md bg-palette-darkBlue">
               <TabsTrigger
-                value="natureza"
+                value="lifestyle"
                 className="data-[state=active]:bg-palette-turquoise data-[state=active]:text-palette-darkBlue"
               >
-                Natureza
+                Lifestyle
               </TabsTrigger>
               <TabsTrigger
                 value="urbana"
@@ -469,54 +331,28 @@ export default function PhotographyPage() {
               >
                 Urbana
               </TabsTrigger>
-              <TabsTrigger
-                value="retratos"
-                className="data-[state=active]:bg-palette-turquoise data-[state=active]:text-palette-darkBlue"
-              >
-                Retratos
-              </TabsTrigger>
-              <TabsTrigger
-                value="eventos"
-                className="data-[state=active]:bg-palette-turquoise data-[state=active]:text-palette-darkBlue"
-              >
-                Eventos
-              </TabsTrigger>
             </TabsList>
           </div>
 
-          <TabsContent value="natureza">
-            <PhotoGrid photos={photos.natureza} />
+          <TabsContent value="lifestyle">
+            <PhotoGrid photos={photos.lifestyle} />
           </TabsContent>
 
           <TabsContent value="urbana">
             <PhotoGrid photos={photos.urbana} />
           </TabsContent>
-
-          <TabsContent value="retratos">
-            <PhotoGrid photos={photos.retratos} />
-          </TabsContent>
-
-          <TabsContent value="eventos">
-            <PhotoGrid photos={photos.eventos} />
-          </TabsContent>
         </Tabs>
 
-        {/* Keep the existing "Sobre Minha Fotografia" and equipment sections */}
         <div className="max-w-4xl mx-auto mt-20 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-palette-white">Sobre Minha Fotografia</h2>
           <div className="text-palette-white/80 space-y-4">
             <p>
-              Minha jornada na fotografia começou há mais de 5 anos, quando adquiri minha primeira câmera DSLR. Desde
-              então, tenho explorado diferentes estilos e técnicas, sempre buscando capturar a essência dos momentos e
-              lugares que fotografo.
+              A fotografia para mim é uma forma de capturar momentos autênticos do cotidiano. Gosto de registrar desde
+              cenas simples do dia a dia até detalhes arquitetônicos que chamam minha atenção.
             </p>
             <p>
-              Minha abordagem fotográfica é minimalista e focada em destacar a beleza natural dos elementos. Prefiro
-              trabalhar com luz natural e busco composições que contem histórias através das imagens.
-            </p>
-            <p>
-              Além da fotografia de natureza e paisagens, que é minha principal paixão, também gosto de explorar a
-              fotografia urbana, retratos e eventos especiais.
+              Minha abordagem é espontânea e focada em capturar a essência de cada momento, seja um jantar especial,
+              uma noite de trabalho ou a beleza de espaços urbanos.
             </p>
           </div>
         </div>
@@ -524,11 +360,9 @@ export default function PhotographyPage() {
         <div className="max-w-4xl mx-auto mt-16 p-8 bg-palette-navy/50 rounded-lg border border-palette-turquoise/20">
           <h3 className="text-xl font-bold mb-4 text-palette-white">Equipamento</h3>
           <ul className="space-y-2 text-palette-white/80">
-            <li>• Câmera: Sony Alpha a7 III</li>
-            <li>• Lentes: Sony 24-70mm f/2.8 GM, Sony 70-200mm f/4 G, Sony 85mm f/1.8</li>
-            <li>• Tripé: Manfrotto Befree Advanced</li>
-            <li>• Filtros: Polarizador circular, ND variável</li>
-            <li>• Edição: Adobe Lightroom e Photoshop</li>
+            <li>• iPhone para capturas espontâneas</li>
+            <li>• Edição: Lightroom Mobile e VSCO</li>
+            <li>• Foco em luz natural e composições autênticas</li>
           </ul>
         </div>
       </div>

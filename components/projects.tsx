@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Github, ArrowRight } from "lucide-react"
+import { ExternalLink, Github, ArrowRight } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
 
@@ -14,70 +14,37 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: "Dashboard Analytics",
+      title: "Mobile Service",
       description:
-        "Dashboard interativo com visualizações de dados em tempo real, filtros avançados e relatórios personalizados.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["React", "TypeScript", "D3.js", "Tailwind CSS"],
-      category: "web",
-      demoUrl: "#",
-      githubUrl: "#",
+        "Aplicação React Native que integra gerenciamento de viagens em grupo, permitindo organização colaborativa e sincronização em tempo real.",
+      image: "/projects/framerama.png",
+      tags: ["React Native", "TypeScript", "Mobile"],
+      category: "mobile",
+      demoUrl: "https://github.com/lucasmdocarmo/mobile-service",
+      githubUrl: "https://github.com/lucasmdocarmo/mobile-service",
       featured: true,
     },
     {
       id: 2,
-      title: "E-commerce Platform",
-      description: "Plataforma completa de e-commerce com carrinho, checkout, pagamentos e painel administrativo.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["Next.js", "Redux", "Stripe", "MongoDB"],
+      title: "Mock Interface Creator",
+      description: "Ferramenta para criação rápida de interfaces mockadas, facilitando o processo de prototipagem e validação de designs.",
+      image: "/projects/mobile-service.png",
+      tags: ["Next.js", "TypeScript", "UI/UX"],
       category: "web",
-      demoUrl: "#",
-      githubUrl: "#",
+      demoUrl: "https://github.com/lucasmdocarmo/mock-interface-creator",
+      githubUrl: "https://github.com/lucasmdocarmo/mock-interface-creator",
       featured: true,
     },
     {
       id: 3,
-      title: "Fintech Mobile App",
-      description: "Aplicativo móvel para gestão financeira pessoal com análise de gastos e investimentos.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["React Native", "TypeScript", "Firebase"],
-      category: "mobile",
-      demoUrl: "#",
-      githubUrl: "#",
+      title: "Framerama",
+      description: "Filme Frame Game - aplicação Next.js que desafia os jogadores a identificar filmes a partir de imagens borradas. A cada tentativa incorreta, a imagem fica mais nítida.",
+      image: "/projects/mock-creator.png",
+      tags: ["Next.js", "TypeScript", "Game"],
+      category: "web",
+      demoUrl: "https://github.com/lucasmdocarmo/framerama",
+      githubUrl: "https://github.com/lucasmdocarmo/framerama",
       featured: true,
-    },
-    {
-      id: 4,
-      title: "Design System",
-      description: "Sistema de design completo com componentes reutilizáveis, documentação e guias de estilo.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["React", "Storybook", "Styled Components"],
-      category: "ui",
-      demoUrl: "#",
-      githubUrl: "#",
-      featured: false,
-    },
-    {
-      id: 5,
-      title: "Task Management App",
-      description: "Aplicativo de gerenciamento de tarefas com recursos de colaboração em equipe.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["React", "GraphQL", "Apollo", "Tailwind CSS"],
-      category: "web",
-      demoUrl: "#",
-      githubUrl: "#",
-      featured: false,
-    },
-    {
-      id: 6,
-      title: "Real-time Chat",
-      description: "Aplicação de chat em tempo real com suporte a mensagens, arquivos e notificações.",
-      image: "/placeholder.svg?height=600&width=800",
-      tags: ["Next.js", "Socket.io", "TypeScript"],
-      category: "web",
-      demoUrl: "#",
-      githubUrl: "#",
-      featured: false,
     },
   ]
 
